@@ -27,5 +27,10 @@ public class AddressController {
         return address;
     }
 
+    @DeleteMapping("/delete/{title}")
+    public void deleteAddress(Principal principal,@PathVariable String title){
+        addressService.deleteAddress(principal,title);
+    }
+
 
 }

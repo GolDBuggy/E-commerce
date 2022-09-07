@@ -24,4 +24,8 @@ public class AddressService {
         address.setCustomerAddress(customerService.findByMail(principal.getName()));
         addressRepo.save(address);
     }
+
+    public void deleteAddress(Principal principal,String title){
+        addressRepo.deleteAddressByCustomerAddressAndAndTitle(customerService.findByMail(principal.getName()),title);
+    }
 }

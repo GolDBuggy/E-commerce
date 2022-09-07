@@ -13,4 +13,8 @@ public interface ProductRepo extends JpaRepository<Product,Long> {
 
     @Query("select u from Product u left join u.productTypes o where (u.registrationTime between :param1 and :param2) and o.name=:param3 order by u.price desc ")
     List<Product> sirala(@Param("param1")Date date1, @Param("param2") Date date2, @Param("param3")String category);
+
+
+
+
 }

@@ -27,5 +27,9 @@ public class ProductTypeService {
         return typeRepo.findById(id).get();
     }
 
+    public List<ProductType> getByName(String name){
+        return typeRepo.findAllByName(name);
+    }
+
 
 }

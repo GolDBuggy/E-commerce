@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -30,6 +31,7 @@ public class CustomerService {
         checkPass(customerDto.getPassword(),customerDto.getRePassword());
         customerDto.setPassword(encoder.encode(customerDto.getPassword()));
         Customer customer=modelMapper.map(customerDto,Customer.class);
+        customer.setCreatedTime(LocalDate.now());
         customer.setRoles(DEFAULT);
         customer.setActive(true);
         customerRepo.save(customer);
@@ -47,5 +49,9 @@ public class CustomerService {
 
     public Customer findByMail(String mail){
         return customerRepo.findByEmail(mail).get();
+    }
+
+    public void deleteCustomer(String email){
+        customerRepo.deleteCustomerByEmail(email);
     }
 }

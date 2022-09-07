@@ -23,8 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests().antMatchers("/product/**","/save","/address/**").hasRole("USER").and().
-         authorizeRequests().antMatchers("/customer/{\\d+}","/all","/type/**").hasRole("ADMIN").and().
+        http.authorizeRequests().antMatchers("/product/**","/save","/address/**","/order","/address/**").hasRole("USER").and().
+         authorizeRequests().antMatchers("/customer/**","/type/**").hasRole("ADMIN").and().
          httpBasic();
     }
 

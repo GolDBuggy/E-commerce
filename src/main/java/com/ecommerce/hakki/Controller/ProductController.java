@@ -5,6 +5,7 @@ import com.ecommerce.hakki.Model.Product;
 import com.ecommerce.hakki.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class ProductController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ProductDto>> getAll(){
-        return ResponseEntity.ok(productService.products());
+        return new ResponseEntity<>(productService.products(), HttpStatus.OK);
     }
 
     @PostMapping("/save")
@@ -34,12 +35,5 @@ public class ProductController {
         return product;
     }
 
-    @GetMapping("/get")
-    public List<ProductDto> paramList(@RequestParam("date1") Date date1,
-                                   @RequestParam("date2") Date date2,
-                                   @RequestParam("category") String category){
-        logger.info(date1.toString()+" -- "+date2.toString()+" -- "+category);
 
-        return productService.getByFilterCategory(date1,date2,category);
-    }
 }
