@@ -1,4 +1,4 @@
-package com.ecommerce.hakki.Dto;
+package com.ecommerce.hakki.Dto.Customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

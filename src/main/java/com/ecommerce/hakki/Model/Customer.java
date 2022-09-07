@@ -1,5 +1,6 @@
 package com.ecommerce.hakki.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -41,5 +43,12 @@ public class Customer {
 
     @Column(name = "join_time")
     private LocalDate createdTime;
+
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnore
+    private List<Product> products;
+
+    @OneToMany(mappedBy = "customerAddress",fetch = FetchType.LAZY)
+    private List<Address> addressList;
 
 }

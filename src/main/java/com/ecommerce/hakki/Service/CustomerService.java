@@ -1,7 +1,7 @@
 package com.ecommerce.hakki.Service;
 
-import com.ecommerce.hakki.Dto.CustomerDto;
-import com.ecommerce.hakki.Dto.RegisterDto;
+import com.ecommerce.hakki.Dto.Customer.CustomerDto;
+import com.ecommerce.hakki.Dto.Customer.RegisterDto;
 import com.ecommerce.hakki.ExcepitonHandle.PasswordException;
 import com.ecommerce.hakki.Model.Customer;
 import com.ecommerce.hakki.Repository.CustomerRepo;
@@ -36,12 +36,16 @@ public class CustomerService {
     }
 
     public CustomerDto getByEmail(String email){
-        CustomerDto customerDto=modelMapper.map(customerRepo.findByEmail(email).get(),CustomerDto.class);
+        CustomerDto customerDto=modelMapper.map(findByMail(email),CustomerDto.class);
         return customerDto;
     }
 
     private void checkPass(String pass,String rePass){
         if(!pass.equals(rePass))
             throw new PasswordException("Şifreler eşit değil!");
+    }
+
+    public Customer findByMail(String mail){
+        return customerRepo.findByEmail(mail).get();
     }
 }
