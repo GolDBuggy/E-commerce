@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -19,7 +20,7 @@ public class ProductDto {
 
     private String name;
     private String description;
-    private LocalDateTime registrationTime;
+    private Date registrationTime;
     private CustomerDto customer;
     private BigDecimal price;
     private List<ProductType> productTypes;

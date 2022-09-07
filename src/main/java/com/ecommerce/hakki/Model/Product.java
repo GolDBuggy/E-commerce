@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class Product {
     private String description;
 
     @Column(name = "registration_time")
-    private LocalDateTime registrationTime;
+    private Date registrationTime;
 
     @Column(name = "price")
     private BigDecimal price;
