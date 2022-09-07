@@ -22,7 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/all").hasRole("USER").and().httpBasic();
+        http.csrf().disable();
+        http.authorizeRequests().antMatchers("/all","/save").hasRole("USER").and().
+         authorizeRequests().antMatchers("/customer/**").hasRole("ADMIN").and().
+         httpBasic();
     }
 
     @Bean

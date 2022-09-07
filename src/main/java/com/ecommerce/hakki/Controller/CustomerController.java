@@ -1,13 +1,12 @@
 package com.ecommerce.hakki.Controller;
 
+import com.ecommerce.hakki.Dto.CustomerDto;
+import com.ecommerce.hakki.Dto.RegisterDto;
 import com.ecommerce.hakki.Model.Customer;
 import com.ecommerce.hakki.Service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,9 +22,14 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public Customer save(@RequestBody Customer customer){
+    public RegisterDto save(@RequestBody RegisterDto customer){
         customerService.saveCustomer(customer);
 
         return customer;
+    }
+
+    @GetMapping("/customer/{email}")
+    public CustomerDto getCustomer(@PathVariable String email){
+        return customerService.getByEmail(email);
     }
 }
