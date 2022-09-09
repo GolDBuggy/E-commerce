@@ -4,15 +4,12 @@ import com.ecommerce.hakki.Dto.Product.ProductDto;
 import com.ecommerce.hakki.Model.Product;
 import com.ecommerce.hakki.Service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -30,9 +27,9 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public Product save(@RequestBody Product product, Principal principal){
-        productService.saveProduct(product,principal);
-        return product;
+    public ProductDto save(@RequestBody Product product, Principal principal){
+        ProductDto productDto=productService.saveProduct(product,principal);
+        return productDto;
     }
 
 

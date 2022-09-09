@@ -5,6 +5,9 @@ import com.ecommerce.hakki.Model.Product;
 import com.ecommerce.hakki.Repository.ProductRepo;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -29,14 +32,17 @@ public class ProductService {
         return productDtos;
     }
 
-    public void saveProduct(Product product, Principal principal){
+    public ProductDto saveProduct(Product product, Principal principal){
         product.setRegistrationTime(new Date());
         product.setCustomer(customerService.findByMail(principal.getName()));
         productRepo.save(product);
+        ProductDto productDto=modelMapper.map(product,ProductDto.class);
+        return productDto;
     }
 
-    public List<ProductDto> getByFilterCategory(Date date1,Date date2,String category){
-        List<ProductDto> products= productRepo.sirala(date1,date2,category).stream().map(product -> modelMapper.map(product,ProductDto.class)).collect(Collectors.toList());
+    public List<ProductDto> getByFilterCategory(Date date1,Date date2,String category,int page){
+        Pageable pageable= PageRequest.of(page,50, Sort.by("price").descending());
+        List<ProductDto> products= productRepo.sirala(date1,date2,category,pageable).stream().map(product -> modelMapper.map(product,ProductDto.class)).collect(Collectors.toList());
         return products;
     }
 

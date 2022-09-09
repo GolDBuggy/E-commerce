@@ -1,7 +1,6 @@
 package com.ecommerce.hakki.Controller;
 
 import com.ecommerce.hakki.Dto.Product.ProductDto;
-import com.ecommerce.hakki.Model.Product;
 import com.ecommerce.hakki.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +19,10 @@ public class CategoryController {
     @GetMapping("/order")
     public List<ProductDto> paramList(@RequestParam("date1") Date date1,
                                       @RequestParam("date2") Date date2,
-                                      @RequestParam("category") String category){
+                                      @RequestParam("category") String category,
+                                      @RequestParam("page") int page){
 
-        return productService.getByFilterCategory(date1,date2,category);
+        return productService.getByFilterCategory(date1,date2,category,page);
     }
 
 
